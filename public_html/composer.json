@@ -1,0 +1,22 @@
+{
+    "name": "auser/public_html",
+    "description": "Fitlent Blog on PHP and MySql",
+    "type": "project",
+    "autoload": {
+        "psr-4": {
+            "Auser\\PublicHtml\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Leon200211",
+            "email": "leon200207@yandex.ru"
+        }
+    ],
+    "minimum-stability": "stable",
+    "require": {
+        "slim/slim": "4.*",
+        "slim/psr7": "^1.6",
+        "twig/twig": "^3.4"
+    }
+}
