@@ -10,6 +10,11 @@
   <component name="ComposerSettings">
     <execution />
   </component>
+  <component name="PhpServers">
+    <servers>
+      <server host="fitlent.web.blog.two" id="b663122c-6302-4749-b1a6-427468fe2fbd" name="fitlent.web.blog.two" />
+    </servers>
+  </component>
   <component name="ProjectId" id="2I2k6sy2jWrXvP5diQzM2YabFHs" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
@@ -32,7 +37,7 @@
       <option name="presentableId" value="Default" />
       <updated>1669386893513</updated>
       <workItem from="1669386894684" duration="2523000" />
-      <workItem from="1669461249052" duration="5152000" />
+      <workItem from="1669461249052" duration="8409000" />
     </task>
     <servers />
   </component>
