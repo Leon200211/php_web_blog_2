@@ -3,12 +3,16 @@ use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
 use Slim\Factory\AppFactory;
 use Blog\PostMapper;
+use Blog\LatestPosts;
+use Blog\Twig\AssetExtentsion;
+use Blog\Slim\TwigMiddleware;
 
 require __DIR__ . '/vendor/autoload.php';
 
 // подключаем Twig
 $loader = new \Twig\Loader\FilesystemLoader('templates');
 $view = new \Twig\Environment($loader);
+
 
 
 // подключение к бд
@@ -29,25 +33,29 @@ try{
     exit;
 }
 
-// Работа с БД
-$postMapper = new PostMapper($connection);
-
-
 
 
 $app = AppFactory::create();
 
+$app->add(new TwigMiddleware($view));
+
 $app->addErrorMiddleware(true, true, true);
 
-$app->get('/', function (Request $request, Response $response, array $args) use ($view) {
-    $body = $view->render('index.twig');
+// домашняя страница
+$app->get('/', function (Request $request, Response $response) use ($view, $connection) {
+    // Работа с БД
+    $latestPosts = new LatestPosts($connection);
+    $posts = $latestPosts->getLastPosts(3);
+    $body = $view->render('index.twig', [
+        'posts' => $posts
+    ]);
     $response->getBody()->write($body);
     return $response;
 });
 
 
-
-$app->get('/about', function (Request $request, Response $response, array $args) use ($view) {
+// страница О нас
+$app->get('/about', function (Request $request, Response $response) use ($view) {
     $body = $view->render('about.twig', [
         'name' => 'leon'
     ]);
@@ -56,8 +64,36 @@ $app->get('/about', function (Request $request, Response $response, array $args)
 });
 
 
+// Пагинация по блогу
+$app->get('/blog[/{page}]', function (Request $request, Response $response, array $args) use ($view, $connection) {
+    // Работа с БД
+    $postMapper = new PostMapper($connection);
+
+    // проверяем на какой страницы находится пагинация
+    $page = isset($args['page']) ? (int) $args['page'] : 1;
+    // количество постов на странице
+    $limit = 2;
+
+    $posts = $postMapper->getList($page, $limit, "DESC");
+
+    $totalCount = $postMapper->getTotalCount();
+
+    $body = $view->render('blog.twig', [
+        'posts' => $posts,
+        'pagination' => [
+            'current' => $page,
+            'paging' => ceil($totalCount / $limit)
+        ]
+    ]);
+    $response->getBody()->write($body);
+    return $response;
+});
+
+
 // создание маршрутизации для постов
-$app->get('/{url_key}', function (Request $request, Response $response, array $args) use ($view, $postMapper) {
+$app->get('/{url_key}', function (Request $request, Response $response, array $args) use ($view, $connection) {
+    // Работа с БД
+    $postMapper = new PostMapper($connection);
     $post = $postMapper->getByUrlKey($args['url_key']);
 
     if(empty($post)){

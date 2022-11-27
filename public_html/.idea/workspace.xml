@@ -8,12 +8,33 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="ComposerSettings">
+    <pharConfigPath>$PROJECT_DIR$/composer.json</pharConfigPath>
     <execution />
   </component>
   <component name="PhpServers">
     <servers>
       <server host="fitlent.web.blog.two" id="b663122c-6302-4749-b1a6-427468fe2fbd" name="fitlent.web.blog.two" />
     </servers>
+  </component>
+  <component name="PhpWorkspaceProjectConfiguration">
+    <include_path>
+      <path value="$PROJECT_DIR$/vendor/twig/twig" />
+      <path value="$PROJECT_DIR$/vendor/psr/container" />
+      <path value="$PROJECT_DIR$/vendor/psr/http-factory" />
+      <path value="$PROJECT_DIR$/vendor/psr/http-message" />
+      <path value="$PROJECT_DIR$/vendor/slim/psr7" />
+      <path value="$PROJECT_DIR$/vendor/psr/http-server-handler" />
+      <path value="$PROJECT_DIR$/vendor/psr/http-server-middleware" />
+      <path value="$PROJECT_DIR$/vendor/fig/http-message-util" />
+      <path value="$PROJECT_DIR$/vendor/psr/log" />
+      <path value="$PROJECT_DIR$/vendor/composer" />
+      <path value="$PROJECT_DIR$/vendor/nikic/fast-route" />
+      <path value="$PROJECT_DIR$/vendor/symfony/polyfill-ctype" />
+      <path value="$PROJECT_DIR$/vendor/ralouphie/getallheaders" />
+      <path value="$PROJECT_DIR$/vendor/symfony/polyfill-mbstring" />
+      <path value="$PROJECT_DIR$/vendor/symfony/polyfill-php80" />
+      <path value="$PROJECT_DIR$/vendor/slim/slim" />
+    </include_path>
   </component>
   <component name="ProjectId" id="2I2k6sy2jWrXvP5diQzM2YabFHs" />
   <component name="ProjectViewState">
@@ -37,7 +58,8 @@
       <option name="presentableId" value="Default" />
       <updated>1669386893513</updated>
       <workItem from="1669386894684" duration="2523000" />
-      <workItem from="1669461249052" duration="8409000" />
+      <workItem from="1669461249052" duration="9000000" />
+      <workItem from="1669548264908" duration="8913000" />
     </task>
     <servers />
   </component>
