@@ -6,13 +6,23 @@ use Blog\PostMapper;
 use Blog\LatestPosts;
 use Blog\Twig\AssetExtentsion;
 use Blog\Slim\TwigMiddleware;
+use Twig\Environment;
 
 require __DIR__ . '/vendor/autoload.php';
 
-// подключаем Twig
-$loader = new \Twig\Loader\FilesystemLoader('templates');
-$view = new \Twig\Environment($loader);
 
+// переехало в config/di.php
+// подключаем Twig
+//$loader = new \Twig\Loader\FilesystemLoader('templates');
+//$view = new \Twig\Environment($loader);
+
+
+// контейнер билдер
+$builder = new \DI\ContainerBuilder();
+$builder->addDefinitions('config/di.php');
+
+$container = $builder->build();
+AppFactory::setContainer($container);
 
 
 // подключение к бд
@@ -37,6 +47,7 @@ try{
 
 $app = AppFactory::create();
 
+$view = $container->get(Environment::class);
 $app->add(new TwigMiddleware($view));
 
 $app->addErrorMiddleware(true, true, true);
@@ -54,7 +65,7 @@ $app->get('/', function (Request $request, Response $response) use ($view, $conn
 });
 
 
-// страница О нас
+// страница "О нас"
 $app->get('/about', function (Request $request, Response $response) use ($view) {
     $body = $view->render('about.twig', [
         'name' => 'leon'

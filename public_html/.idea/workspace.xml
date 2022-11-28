@@ -7,7 +7,7 @@
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="ComposerSettings">
+  <component name="ComposerSettings" doNotAsk="true">
     <pharConfigPath>$PROJECT_DIR$/composer.json</pharConfigPath>
     <execution />
   </component>
@@ -34,6 +34,10 @@
       <path value="$PROJECT_DIR$/vendor/symfony/polyfill-mbstring" />
       <path value="$PROJECT_DIR$/vendor/symfony/polyfill-php80" />
       <path value="$PROJECT_DIR$/vendor/slim/slim" />
+      <path value="$PROJECT_DIR$/vendor/php-di/invoker" />
+      <path value="$PROJECT_DIR$/vendor/laravel/serializable-closure" />
+      <path value="$PROJECT_DIR$/vendor/php-di/phpdoc-reader" />
+      <path value="$PROJECT_DIR$/vendor/php-di/php-di" />
     </include_path>
   </component>
   <component name="ProjectId" id="2I2k6sy2jWrXvP5diQzM2YabFHs" />
@@ -59,7 +63,8 @@
       <updated>1669386893513</updated>
       <workItem from="1669386894684" duration="2523000" />
       <workItem from="1669461249052" duration="9000000" />
-      <workItem from="1669548264908" duration="8913000" />
+      <workItem from="1669548264908" duration="9224000" />
+      <workItem from="1669654413638" duration="1347000" />
     </task>
     <servers />
   </component>
