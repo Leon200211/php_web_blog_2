@@ -2,25 +2,21 @@
 
 namespace Blog;
 
+use Blog\Database;
 use PDO;
 
 // класс для работы с БД
 class PostMapper
 {
 
-    /**
-     * @var PDO
-     */
-    private PDO $connection;
+
+    private Database $database;
 
 
-    /**
-     * PostMapper constructor.
-     * @param PDO $connection
-     */
-    public function __construct(PDO $connection)
+
+    public function __construct(Database $database)
     {
-        $this->connection = $connection;
+        $this->database = $database;
     }
 
     /**
@@ -29,7 +25,7 @@ class PostMapper
      */
     // возвращает пост по переданному ключу
     public function getByUrlKey(string $urlKey) : ?array {
-        $statement = $this->connection->prepare("SELECT * FROM post WHERE url_key = :urlKey");
+        $statement = $this->getConnection()->prepare("SELECT * FROM post WHERE url_key = :urlKey");
 
         $statement->execute([
             'urlKey' => $urlKey
@@ -58,7 +54,7 @@ class PostMapper
 
         $start = ($page - 1) * $limit;
 
-        $statement = $this->connection->prepare("SELECT * FROM post ORDER BY published_date $direction LIMIT $start, $limit ");
+        $statement = $this->getConnection()->prepare("SELECT * FROM post ORDER BY published_date $direction LIMIT $start, $limit ");
         $statement->execute();
 
         return $statement->fetchAll();
@@ -68,11 +64,16 @@ class PostMapper
 
     // общее число постов, которые мы собираемся отрисовывать
     public function getTotalCount() {
-        $statement = $this->connection->prepare("SELECT count(post_id) as total FROM post");
+        $statement = $this->getConnection()->prepare("SELECT count(post_id) as total FROM post");
         $statement->execute();
 
         // если результат есть, то вернуть, в противном случае вернуть 0
         return (int) ($statement->fetchColumn() ?? 0);
+    }
+
+
+    private function getConnection() : PDO{
+        return $this->database->getConnection();
     }
 
 }

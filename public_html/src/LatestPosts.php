@@ -3,31 +3,26 @@
 
 namespace Blog;
 
-use PDO;
+use Blog\Database;
+
 
 class LatestPosts
 {
 
-    private PDO $connection;
+    private Database $database;
 
 
-    /**
-     * LatestPosts constructor.
-     * @param PDO $connection
-     */
-    public function __construct(PDO $connection)
+
+    public function __construct(Database $database)
     {
-        $this->connection = $connection;
+        $this->database = $database;
     }
 
 
-    /**
-     * @param int $limit
-     * @return array|null
-     */
+
     // вернуть последние посты
     public function getLastPosts(int $limit) : ?array{
-        $statement = $this->connection->prepare("SELECT * FROM post ORDER BY published_date DESC LIMIT $limit");
+        $statement = $this->database->getConnection()->prepare("SELECT * FROM post ORDER BY published_date DESC LIMIT $limit");
         $statement->execute();
 
         return $statement->fetchAll();
