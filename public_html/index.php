@@ -1,7 +1,7 @@
 <?php
 
 use Slim\Factory\AppFactory;
-use Blog\Slim\TwigMiddleware;
+
 use DevCoder\DotEnv;
 use Blog\Route\HomePage;
 use Blog\Route\AboutPage;
@@ -29,8 +29,6 @@ $container = $builder->build();
 AppFactory::setContainer($container);
 
 $app = AppFactory::create();
-$app->add($container->get(TwigMiddleware::class));
-$app->addErrorMiddleware(true, true, true);
 
 
 // домашняя страница
