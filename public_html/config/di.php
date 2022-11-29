@@ -23,7 +23,9 @@ return [
         ->constructorParameter('dsn', getenv('DATABASE_DSN'))
         ->constructorParameter('username', getenv('DATABASE_USERNAME'))
         ->constructorParameter('password', getenv('DATABASE_PASSWORD'))
-        ->constructorParameter('options', []),
+        ->constructorParameter('options', [])
+        ->method('setAttribute', PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION)
+        ->method('setAttribute', PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC),
     Database::class => autowire()
         ->constructorParameter('connection', get(PDO::class)),
 
