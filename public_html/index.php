@@ -1,7 +1,6 @@
 <?php
 
 use Slim\Factory\AppFactory;
-
 use DevCoder\DotEnv;
 use Blog\Route\HomePage;
 use Blog\Route\AboutPage;
