@@ -7,6 +7,8 @@ use Blog\LatestPosts;
 use Blog\Twig\AssetExtentsion;
 use Blog\Slim\TwigMiddleware;
 use Twig\Environment;
+use DevCoder\DotEnv;
+use Blog\Database;
 
 require __DIR__ . '/vendor/autoload.php';
 
@@ -20,35 +22,24 @@ require __DIR__ . '/vendor/autoload.php';
 // контейнер билдер
 $builder = new \DI\ContainerBuilder();
 $builder->addDefinitions('config/di.php');
+(new DotEnv(__DIR__ . '/.env'))->load();
+
+
+
 
 $container = $builder->build();
 AppFactory::setContainer($container);
-
-
-// подключение к бд
-$config = include 'config/database.php';
-$dsn = $config['dsn'];
-$username = $config['username'];
-$password = $config['password'];
-
-
-
-// создаем подключение к БД
-try{
-    $connection = new PDO($dsn, $username, $password);
-    $connection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-    $connection->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
-}catch (PDOException $exception){
-    echo 'Database error: ' . $exception->getMessage();
-    exit;
-}
-
-
 
 $app = AppFactory::create();
 
 $view = $container->get(Environment::class);
 $app->add(new TwigMiddleware($view));
+
+
+// для подключения к БД
+$connection = $container->get(Database::class)->getConnection();
+
+
 
 $app->addErrorMiddleware(true, true, true);
 

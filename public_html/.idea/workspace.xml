@@ -38,6 +38,7 @@
       <path value="$PROJECT_DIR$/vendor/laravel/serializable-closure" />
       <path value="$PROJECT_DIR$/vendor/php-di/phpdoc-reader" />
       <path value="$PROJECT_DIR$/vendor/php-di/php-di" />
+      <path value="$PROJECT_DIR$/vendor/devcoder-xyz/php-dotenv" />
     </include_path>
   </component>
   <component name="ProjectId" id="2I2k6sy2jWrXvP5diQzM2YabFHs" />
@@ -64,7 +65,8 @@
       <workItem from="1669386894684" duration="2523000" />
       <workItem from="1669461249052" duration="9000000" />
       <workItem from="1669548264908" duration="9224000" />
-      <workItem from="1669654413638" duration="1347000" />
+      <workItem from="1669654413638" duration="1765000" />
+      <workItem from="1669711558793" duration="2956000" />
     </task>
     <servers />
   </component>
